@@ -6,7 +6,7 @@ exports[`Pruebas en <GifExpertApp /> debe mostrar una lista de categorías 1`] =
     GifExpertApp
   </h2>
   <AddCategory
-    setCategories={[Function]}
+    onNewCategory={[Function]}
   />
   <hr />
   <ol>
@@ -28,7 +28,7 @@ exports[`Pruebas en <GifExpertApp /> debe mostrarse correctamente 1`] = `
     GifExpertApp
   </h2>
   <AddCategory
-    setCategories={[Function]}
+    onNewCategory={[Function]}
   />
   <hr />
   <ol />

@@ -9,15 +9,13 @@ export const AddCategory = ({ onNewCategory }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (inputValue.trim().length > 2) {
-      // setCategories((categories) => [inputValue, ...categories]);
-      onNewCategory(inputValue.trim());
-      setInputValue("");
-    }
+    if (inputValue.trim().length <= 1) return;
+    // setCategories((categories) => [inputValue, ...categories]);
+    setInputValue("");
+    onNewCategory(inputValue.trim());
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} aria-label="form">
       <input type="text" value={inputValue} onChange={handleInputChange} />
     </form>
   );

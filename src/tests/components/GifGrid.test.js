@@ -1,23 +1,26 @@
 import React from "react";
 import "@testing-library/jest-dom";
 
-import { shallow } from "enzyme";
 import { GifGrid } from "../../components/GifGrid";
 import { useFetchGifs } from "../../hooks/useFetchGifs";
+import { render, screen } from "@testing-library/react";
 jest.mock("../../hooks/useFetchGifs");
 
 describe("Pruebas en <GifGrid />", () => {
   const category = "One Punch";
-  const wrapper = shallow(<GifGrid category={category} />);
-  test("debe mostrarse correctamente", () => {
+
+  test("debe mostrar el loading inicialmente", () => {
     useFetchGifs.mockReturnValue({
       data: [],
       loading: true,
     });
 
-    expect(wrapper).toMatchSnapshot();
+    render(<GifGrid category={category} />);
+    expect(screen.getByText("Loading..."));
+    expect(screen.getByText(category));
   });
-  test("debe mostrar items cuando se cargan imágenes useFetchGifs", () => {
+
+  test("debe mostrar items cuando se cargan las imágenes mediante useFetchGifs", () => {
     const gifs = [
       {
         id: "ABC",
@@ -34,8 +37,7 @@ describe("Pruebas en <GifGrid />", () => {
       data: gifs,
       loading: false,
     });
-    expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find("p").exists()).toBe(false);
-    expect(wrapper.find("GifGridItem").length).toBe(gifs.length);
+    render(<GifGrid category={category} />);
+    expect(screen.getAllByRole("img").length).toBe(2);
   });
 });
